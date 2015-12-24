@@ -353,29 +353,20 @@ qboolean	NET_GetPacket (netsrc_t sock, netadr_t *net_from, sizebuf_t *net_messag
 		fromlen = sizeof(from);
 		ret = recvfrom (net_socket, net_message->data, net_message->maxsize
 			, 0, (struct sockaddr *)&from, &fromlen);
-
-		SockadrToNetadr (&from, net_from);
-
 		if (ret == -1)
 		{
 			err = WSAGetLastError();
 
 			if (err == WSAEWOULDBLOCK)
 				continue;
-			if (err == WSAEMSGSIZE) {
-				Com_Printf ("Warning:  Oversize packet from %s\n",
-						NET_AdrToString(*net_from));
-				continue;
-			}
-
 			if (dedicated->value)	// let dedicated servers continue after errors
-				Com_Printf ("NET_GetPacket: %s from %s\n", NET_ErrorString(),
-						NET_AdrToString(*net_from));
+				Com_Printf ("NET_GetPacket: %s", NET_ErrorString());
 			else
-				Com_Error (ERR_DROP, "NET_GetPacket: %s from %s", 
-						NET_ErrorString(), NET_AdrToString(*net_from));
+				Com_Error (ERR_DROP, "NET_GetPacket: %s", NET_ErrorString());
 			continue;
 		}
+
+		SockadrToNetadr (&from, net_from);
 
 		if (ret == net_message->maxsize)
 		{
@@ -448,20 +439,17 @@ void NET_SendPacket (netsrc_t sock, int length, void *data, netadr_t to)
 
 		if (dedicated->value)	// let dedicated servers continue after errors
 		{
-			Com_Printf ("NET_SendPacket ERROR: %s to %s\n", NET_ErrorString(),
-				NET_AdrToString (to));
+			Com_Printf ("NET_SendPacket ERROR: %s\n", NET_ErrorString());
 		}
 		else
 		{
 			if (err == WSAEADDRNOTAVAIL)
 			{
-				Com_DPrintf ("NET_SendPacket Warning: %s : %s\n", 
-						NET_ErrorString(), NET_AdrToString (to));
+				Com_DPrintf ("NET_SendPacket Warning: %s : %s\n", NET_ErrorString(), NET_AdrToString (to));
 			}
 			else
 			{
-				Com_Error (ERR_DROP, "NET_SendPacket ERROR: %s to %s\n", 
-						NET_ErrorString(), NET_AdrToString (to));
+				Com_Error (ERR_DROP, "NET_SendPacket ERROR: %s\n", NET_ErrorString());
 			}
 		}
 	}

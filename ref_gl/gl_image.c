@@ -49,15 +49,15 @@ void GL_SetTexturePalette( unsigned palette[256] )
 	int i;
 	unsigned char temptable[768];
 
+	for ( i = 0; i < 256; i++ )
+	{
+		temptable[i*3+0] = ( palette[i] >> 0 ) & 0xff;
+		temptable[i*3+1] = ( palette[i] >> 8 ) & 0xff;
+		temptable[i*3+2] = ( palette[i] >> 16 ) & 0xff;
+	}
+
 	if ( qglColorTableEXT && gl_ext_palettedtexture->value )
 	{
-		for ( i = 0; i < 256; i++ )
-		{
-			temptable[i*3+0] = ( palette[i] >> 0 ) & 0xff;
-			temptable[i*3+1] = ( palette[i] >> 8 ) & 0xff;
-			temptable[i*3+2] = ( palette[i] >> 16 ) & 0xff;
-		}
-
 		qglColorTableEXT( GL_SHARED_TEXTURE_PALETTE_EXT,
 						   GL_RGB,
 						   256,
@@ -69,22 +69,22 @@ void GL_SetTexturePalette( unsigned palette[256] )
 
 void GL_EnableMultitexture( qboolean enable )
 {
-	if ( !qglSelectTextureSGIS && !qglActiveTextureARB )
+	if ( !qglSelectTextureSGIS )
 		return;
 
 	if ( enable )
 	{
-		GL_SelectTexture( GL_TEXTURE1 );
+		GL_SelectTexture( GL_TEXTURE1_SGIS );
 		qglEnable( GL_TEXTURE_2D );
 		GL_TexEnv( GL_REPLACE );
 	}
 	else
 	{
-		GL_SelectTexture( GL_TEXTURE1 );
+		GL_SelectTexture( GL_TEXTURE1_SGIS );
 		qglDisable( GL_TEXTURE_2D );
 		GL_TexEnv( GL_REPLACE );
 	}
-	GL_SelectTexture( GL_TEXTURE0 );
+	GL_SelectTexture( GL_TEXTURE0_SGIS );
 	GL_TexEnv( GL_REPLACE );
 }
 
@@ -92,34 +92,23 @@ void GL_SelectTexture( GLenum texture )
 {
 	int tmu;
 
-	if ( !qglSelectTextureSGIS && !qglActiveTextureARB )
+	if ( !qglSelectTextureSGIS )
 		return;
 
-	if ( texture == GL_TEXTURE0 )
-	{
+	if ( texture == GL_TEXTURE0_SGIS )
 		tmu = 0;
-	}
 	else
-	{
 		tmu = 1;
-	}
 
 	if ( tmu == gl_state.currenttmu )
-	{
 		return;
-	}
 
 	gl_state.currenttmu = tmu;
 
-	if ( qglSelectTextureSGIS )
-	{
-		qglSelectTextureSGIS( texture );
-	}
-	else if ( qglActiveTextureARB )
-	{
-		qglActiveTextureARB( texture );
-		qglClientActiveTextureARB( texture );
-	}
+	if ( tmu == 0 )
+		qglSelectTextureSGIS( GL_TEXTURE0_SGIS );
+	else
+		qglSelectTextureSGIS( GL_TEXTURE1_SGIS );
 }
 
 void GL_TexEnv( GLenum mode )
@@ -148,7 +137,7 @@ void GL_Bind (int texnum)
 void GL_MBind( GLenum target, int texnum )
 {
 	GL_SelectTexture( target );
-	if ( target == GL_TEXTURE0 )
+	if ( target == GL_TEXTURE0_SGIS )
 	{
 		if ( gl_state.currenttextures[0] == texnum )
 			return;

@@ -1,0 +1,78 @@
+﻿Build started 4/25/2015 1:53:11 AM.
+     1>Project "C:\Users\Den\Projects\Quake-2\ref_soft\ref_soft.vcxproj" on node 4 (Build target(s)).
+     1>CustomBuild:
+         Performing Custom Build Tools
+          Assembling: C:\Users\Den\Projects\Quake-2\ref_soft\r_aclipa.asm
+         Microsoft (R) Macro Assembler Version 12.00.31101.0
+         Copyright (C) Microsoft Corporation.  All rights reserved.
+         
+         Performing Custom Build Tools
+         Microsoft (R) Macro Assembler Version 12.00.31101.0
+         Copyright (C) Microsoft Corporation.  All rights reserved.
+         
+          Assembling: C:\Users\Den\Projects\Quake-2\ref_soft\r_draw16.asm
+         Performing Custom Build Tools
+         Microsoft (R) Macro Assembler Version 12.00.31101.0
+         Copyright (C) Microsoft Corporation.  All rights reserved.
+         
+          Assembling: C:\Users\Den\Projects\Quake-2\ref_soft\r_drawa.asm
+         Performing Custom Build Tools
+          Assembling: C:\Users\Den\Projects\Quake-2\ref_soft\r_edgea.asm
+         Microsoft (R) Macro Assembler Version 12.00.31101.0
+         Copyright (C) Microsoft Corporation.  All rights reserved.
+         
+         Performing Custom Build Tools
+          Assembling: C:\Users\Den\Projects\Quake-2\ref_soft\r_polysa.asm
+         Microsoft (R) Macro Assembler Version 12.00.31101.0
+         Copyright (C) Microsoft Corporation.  All rights reserved.
+         
+         Performing Custom Build Tools
+          Assembling: C:\Users\Den\Projects\Quake-2\ref_soft\r_scana.asm
+         Microsoft (R) Macro Assembler Version 12.00.31101.0
+         Copyright (C) Microsoft Corporation.  All rights reserved.
+         
+         Performing Custom Build Tools
+          Assembling: C:\Users\Den\Projects\Quake-2\ref_soft\r_spr8.asm
+         Microsoft (R) Macro Assembler Version 12.00.31101.0
+         Copyright (C) Microsoft Corporation.  All rights reserved.
+         
+         Performing Custom Build Tools
+         Microsoft (R) Macro Assembler Version 12.00.31101.0
+         Copyright (C) Microsoft Corporation.  All rights reserved.
+         
+          Assembling: C:\Users\Den\Projects\Quake-2\ref_soft\r_surf8.asm
+         Performing Custom Build Tools
+         Microsoft (R) Macro Assembler Version 12.00.31101.0
+         Copyright (C) Microsoft Corporation.  All rights reserved.
+         
+          Assembling: C:\Users\Den\Projects\Quake-2\ref_soft\r_varsa.asm
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:".\..\debug\ref_soft.dll" /INCREMENTAL:NO /NOLOGO winmm.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /NODEFAULTLIB:libc /DEF:".\ref_soft.def" /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:".\..\debug\ref_soft.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:".\..\debug\ref_soft.lib" /MACHINE:X86 /SAFESEH /DLL .\..\debug\\.obj
+         .\debug\q_shared.obj
+         .\debug\q_shwin.obj
+         .\debug\rw_ddraw.obj
+         .\debug\rw_dib.obj
+         .\debug\rw_imp.obj
+         .\debug\r_aclip.obj
+         .\debug\r_alias.obj
+         .\debug\r_bsp.obj
+         .\debug\r_draw.obj
+         .\debug\r_edge.obj
+         .\debug\r_image.obj
+         .\debug\r_light.obj
+         .\debug\r_main.obj
+         .\debug\r_misc.obj
+         .\debug\r_model.obj
+         .\debug\r_part.obj
+         .\debug\r_poly.obj
+         .\debug\r_polyse.obj
+         .\debug\r_rast.obj
+         .\debug\r_scan.obj
+         .\debug\r_sprite.obj
+         .\debug\r_surf.obj
+     1>LINK : fatal error LNK1181: cannot open input file '.\..\debug\\.obj'
+     1>Done Building Project "C:\Users\Den\Projects\Quake-2\ref_soft\ref_soft.vcxproj" (Build target(s)) -- FAILED.
+
+Build FAILED.
+
+Time Elapsed 00:00:00.20

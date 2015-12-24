@@ -779,20 +779,26 @@ void G_SetClientEffects (edict_t *ent)
 	CTFEffects(ent);
 //ZOID
 
-	if (ent->client->quad_framenum > level.framenum)
+	if (ent->client->quad_framenum > level.framenum
+//ZOID
+		&& (level.framenum & 8)
+//ZOID
+		)
 	{
 		remaining = ent->client->quad_framenum - level.framenum;
 		if (remaining > 30 || (remaining & 4) )
-//			ent->s.effects |= EF_QUAD;
-			CTFSetPowerUpEffect(ent, EF_QUAD);
+			ent->s.effects |= EF_QUAD;
 	}
 
-	if (ent->client->invincible_framenum > level.framenum)
+	if (ent->client->invincible_framenum > level.framenum
+//ZOID
+		&& (level.framenum & 8)
+//ZOID
+		)
 	{
 		remaining = ent->client->invincible_framenum - level.framenum;
 		if (remaining > 30 || (remaining & 4) )
-//			ent->s.effects |= EF_PENT;
-			CTFSetPowerUpEffect(ent, EF_PENT);
+			ent->s.effects |= EF_PENT;
 	}
 
 	// show cheaters!!!

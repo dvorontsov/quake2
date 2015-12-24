@@ -520,16 +520,11 @@ void CL_ParseConfigString (void)
 {
 	int		i;
 	char	*s;
-	char	olds[MAX_QPATH];
 
 	i = MSG_ReadShort (&net_message);
 	if (i < 0 || i >= MAX_CONFIGSTRINGS)
 		Com_Error (ERR_DROP, "configstring > MAX_CONFIGSTRINGS");
 	s = MSG_ReadString(&net_message);
-
-	strncpy (olds, cl.configstrings[i], sizeof(olds));
-	olds[sizeof(olds) - 1] = 0;
-
 	strcpy (cl.configstrings[i], s);
 
 	// do something apropriate 
@@ -564,7 +559,7 @@ void CL_ParseConfigString (void)
 	}
 	else if (i >= CS_PLAYERSKINS && i < CS_PLAYERSKINS+MAX_CLIENTS)
 	{
-		if (cl.refresh_prepped && strcmp(olds, s))
+		if (cl.refresh_prepped)
 			CL_ParseClientinfo (i-CS_PLAYERSKINS);
 	}
 }

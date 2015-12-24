@@ -537,8 +537,6 @@ extern	cvar_t	*password;
 extern	cvar_t	*g_select_empty;
 extern	cvar_t	*dedicated;
 
-extern	cvar_t	*filterban;
-
 extern	cvar_t	*sv_gravity;
 extern	cvar_t	*sv_maxvelocity;
 
@@ -769,7 +767,6 @@ void InitClientPersistant (gclient_t *client);
 void InitClientResp (gclient_t *client);
 void InitBodyQue (void);
 void ClientBeginServerFrame (edict_t *ent);
-void ClientUserinfoChanged (edict_t *ent, char *userinfo);
 
 //
 // g_player.c
@@ -822,10 +819,6 @@ void SaveClientData (void);
 void FetchClientEntData (edict_t *ent);
 void EndDMLevel (void);
 
-//
-// g_svcmds.c
-//
-qboolean SV_FilterPacket (char *from);
 
 //============================================================================
 
@@ -852,7 +845,7 @@ typedef struct
 	// values saved and restored from edicts when changing levels
 	int			health;
 	int			max_health;
-	int			savedFlags;
+	qboolean	powerArmorActive;
 
 	int			selected_item;
 	int			inventory[MAX_ITEMS];
@@ -886,7 +879,6 @@ typedef struct
 	float		ctf_flagsince;
 	float		ctf_lastfraggedcarrier;
 	qboolean	id_state;
-	float		lastidtime;
 	qboolean	voted; // for elections
 	qboolean	ready;
 	qboolean	admin;

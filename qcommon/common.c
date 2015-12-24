@@ -131,10 +131,7 @@ void Com_Printf (char *fmt, ...)
 		if (!logfile)
 		{
 			Com_sprintf (name, sizeof(name), "%s/qconsole.log", FS_Gamedir ());
-			if (logfile_active->value > 2)
-				logfile = fopen (name, "a");
-			else
-				logfile = fopen (name, "w");
+			logfile = fopen (name, "w");
 		}
 		if (logfile)
 			fprintf (logfile, "%s", msg);
